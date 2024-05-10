@@ -13,3 +13,18 @@ export const Sender = () => {
             }));
         }
     }, []);
+    const initiateConn = async () => {
+
+        if (!socket) {
+            alert("Socket not found");
+            return;
+        }
+
+        socket.onmessage = async (event) => {
+            const message = JSON.parse(event.data);
+            if (message.type === 'createAnswer') {
+                await pc.setRemoteDescription(message.sdp);
+            } else if (message.type === 'iceCandidate') {
+                pc.addIceCandidate(message.candidate);
+            }
+        }

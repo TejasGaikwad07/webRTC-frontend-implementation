@@ -28,3 +28,13 @@ export const Sender = () => {
                 pc.addIceCandidate(message.candidate);
             }
         }
+        const pc = new RTCPeerConnection();
+        setPC(pc);
+        pc.onicecandidate = (event) => {
+            if (event.candidate) {
+                socket?.send(JSON.stringify({
+                    type: 'iceCandidate',
+                    candidate: event.candidate
+                }));
+            }
+        }

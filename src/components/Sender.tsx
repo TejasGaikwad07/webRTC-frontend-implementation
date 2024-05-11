@@ -49,3 +49,4 @@ export const Sender = () => {
             
         getCameraStreamAndSend(pc);
     }
+}

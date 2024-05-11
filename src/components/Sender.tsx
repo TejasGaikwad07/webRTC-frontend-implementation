@@ -38,3 +38,14 @@ export const Sender = () => {
                 }));
             }
         }
+        pc.onnegotiationneeded = async () => {
+            const offer = await pc.createOffer();
+            await pc.setLocalDescription(offer);
+            socket?.send(JSON.stringify({
+                type: 'createOffer',
+                sdp: pc.localDescription
+            }));
+        }
+            
+        getCameraStreamAndSend(pc);
+    }

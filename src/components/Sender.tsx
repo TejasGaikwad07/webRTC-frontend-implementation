@@ -61,5 +61,10 @@ export const Sender = () => {
             });
         });
     }
-
+    return <div>
+    Sender
+    <button onClick={initiateConn}> Send data </button>
+</div>
 }
+
+

@@ -12,3 +12,12 @@ export const Receiver = () => {
         }
         startReceiving(socket);
     }, []);
+    function startReceiving(socket: WebSocket) {
+        const video = document.createElement('video');
+        document.body.appendChild(video);
+
+        const pc = new RTCPeerConnection();
+        pc.ontrack = (event) => {
+            video.srcObject = new MediaStream([event.track]);
+            video.play();
+        }
